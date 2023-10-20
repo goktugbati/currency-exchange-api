@@ -1,6 +1,11 @@
 package com.currencystack.entity.enums;
 
-public enum EnumCurrency {
+import lombok.Getter;
+
+import java.util.Optional;
+
+@Getter
+public enum Currency {
     AED("United Arab Emirates Dirham"),
     AFN("Afghan Afghani"),
     ALL("Albanian Lek"),
@@ -173,16 +178,17 @@ public enum EnumCurrency {
     ZWL("Zimbabwean Dollar");
 
     private final String description;
+    private final String code = this.name();
 
-    EnumCurrency(String description) {
+    Currency(String description) {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public EnumCurrency convert(String source) {
-        return EnumCurrency.valueOf(source.toUpperCase());
+    public static Optional<Currency> convert(String source) {
+        try {
+            return Optional.of(Currency.valueOf(source.toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            return Optional.empty();
+        }
     }
 }
