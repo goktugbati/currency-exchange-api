@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Builder
 @AllArgsConstructor
-public class ConversionRequestDTO {
+public class TransactionRequestDTO {
     @NotBlank(message = "Source currency code is required")
     private String sourceCurrencyCode;
 

@@ -16,7 +16,7 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Conversion {
+public class Transaction {
     @Id
     @GeneratedValue
     private Long transactionId;
@@ -24,5 +24,5 @@ public class Conversion {
     private String sourceCurrencyCode;
     private BigDecimal targetAmount;
     private String targetCurrencyCode;
-    private Instant transactionDate;
+    private Instant creationTimestamp;
 }

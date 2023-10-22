@@ -1,8 +1,8 @@
 package com.currencystack.integration;
 
-import com.currencystack.dto.ConversionResponseDTO;
-import com.currencystack.dto.ConversionRequestDTO;
-import com.currencystack.service.ConversionService;
+import com.currencystack.dto.TransactionRequestDTO;
+import com.currencystack.dto.TransactionResponseDTO;
+import com.currencystack.service.TransactionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,13 @@ import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ConversionControllerTest {
+public class TransactionControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private ConversionService conversionService;
+    private TransactionService transactionService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -38,17 +38,17 @@ public class ConversionControllerTest {
         String targetCurrencyCode = "EUR";
         double amount = 100.00;
 
-        ConversionResponseDTO mockResponse = new ConversionResponseDTO();
+        TransactionResponseDTO mockResponse = new TransactionResponseDTO();
         mockResponse.setTargetAmount(BigDecimal.valueOf(amount));
 
         // Mock the service's behavior
-        when(conversionService.convert(new ConversionRequestDTO(sourceCurrencyCode, targetCurrencyCode, amount)))
+        when(transactionService.convert(new TransactionRequestDTO(sourceCurrencyCode, targetCurrencyCode, amount)))
                 .thenReturn(mockResponse);
 
 
         mockMvc.perform(post("/api/conversions/convert")
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(new ConversionRequestDTO(sourceCurrencyCode, targetCurrencyCode, amount))))
+                        .content(objectMapper.writeValueAsString(new TransactionRequestDTO(sourceCurrencyCode, targetCurrencyCode, amount))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.targetAmount", is(amount)));
     }

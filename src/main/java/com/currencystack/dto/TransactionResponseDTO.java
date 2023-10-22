@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConversionResponseDTO {
+public class TransactionResponseDTO {
     private String sourceCurrencyCode;
     private String targetCurrencyCode;
     private BigDecimal sourceAmount;

@@ -1,18 +1,18 @@
 package com.currencystack.dto.mapper;
 
-import com.currencystack.dto.ConversionResponseDTO;
-import com.currencystack.dto.ConversionRequestDTO;
-import com.currencystack.entity.Conversion;
+import com.currencystack.dto.TransactionRequestDTO;
+import com.currencystack.dto.TransactionResponseDTO;
+import com.currencystack.entity.Transaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface ConversionMapper {
+public interface TransactionMapper {
 
-    ConversionResponseDTO toDTO(Conversion conversion);
+    TransactionResponseDTO toDTO(Transaction transaction);
 
     @Mapping(source = "sourceCurrencyCode", target = "sourceCurrencyCode")
     @Mapping(source = "targetCurrencyCode", target = "targetCurrencyCode")
     @Mapping(source = "amount", target = "sourceAmount")
-    Conversion toEntity(ConversionRequestDTO conversionRequestDTO);
+    Transaction toEntity(TransactionRequestDTO transactionRequestDTO);
 }

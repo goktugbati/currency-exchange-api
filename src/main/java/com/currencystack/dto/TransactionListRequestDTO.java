@@ -5,12 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ConversionListResponseDTO {
-    private List<ConversionResponseDTO> conversions;
+public class TransactionListRequestDTO {
+    private Long transactionId;
+    private LocalDateTime transactionDate;
 }
